@@ -45,8 +45,8 @@
 				和泉市制施行70周年記念
 			</p>
 			<div class="text-lg md:text-xl mb-12 space-y-2">
-				<p class="font-semibold">2025年10月25日（土）・26日（日）</p>
-				<p>エコールいずみ・桃山学院大学・久保惣美術館</p>
+				<p class="font-semibold">2025年10月25日（土）10:00〜19:00</p>
+				<p>エコールいずみ・桃山学院大学・久保惣記念美術館</p>
 			</div>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
 				<a href="#about" class="bg-white text-blue-900 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-colors">
@@ -79,7 +79,7 @@
 					</svg>
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-4">伝統・文化</h3>
-				<p class="text-gray-600">久保惣美術館、さをり織り、いずみ木綿など、和泉市の豊かな伝統文化を体験</p>
+				<p class="text-gray-600">久保惣記念美術館、さをり織り、いずみ木綿など、和泉市の豊かな伝統文化を体験</p>
 			</div>
 			
 			<div class="text-center p-8 bg-green-50 rounded-2xl">
@@ -135,7 +135,7 @@
 			<div class="bg-white rounded-2xl overflow-hidden shadow-lg">
 				<div class="h-48 bg-gradient-to-br from-purple-500 to-purple-600"></div>
 				<div class="p-8">
-					<h3 class="text-2xl font-bold text-gray-900 mb-4">久保惣美術館</h3>
+					<h3 class="text-2xl font-bold text-gray-900 mb-4">久保惣記念美術館</h3>
 					<p class="text-gray-600 mb-6">伝統文化と芸術の展示・体験</p>
 					<div class="text-sm text-purple-600 font-semibold">詳細を見る →</div>
 				</div>
@@ -157,8 +157,7 @@
 				<div class="space-y-6">
 					<div class="border-l-4 border-blue-500 pl-6">
 						<h4 class="font-semibold text-lg text-gray-900">開催日</h4>
-						<p class="text-gray-600">2025年10月25日（土）・26日（日）</p>
-						<p class="text-sm text-gray-500">※26日は出展多数の場合に開催検討</p>
+						<p class="text-gray-600">2025年10月25日（土）</p>
 					</div>
 					
 					<div class="border-l-4 border-green-500 pl-6">
@@ -166,7 +165,7 @@
 						<ul class="text-gray-600 space-y-1">
 							<li>• エコールいずみ</li>
 							<li>• 桃山学院大学（エレノア館・ヨハネ館）</li>
-							<li>• 久保惣美術館</li>
+							<li>• 久保惣記念美術館</li>
 						</ul>
 					</div>
 				</div>
@@ -174,7 +173,7 @@
 			
 			<div class="bg-gray-100 rounded-2xl p-8">
 				<div class="h-64 bg-gray-300 rounded-lg flex items-center justify-center text-gray-500">
-					地図エリア
+					<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1m-6U2Ifh-1s5ghHsvdbYMI4NIgojmVk&ehbc=2E312F" width="100%" height="100%"></iframe>
 				</div>
 			</div>
 		</div>
