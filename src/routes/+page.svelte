@@ -1,14 +1,36 @@
 <script>
 	import { onMount } from 'svelte';
-	
+
 	let scrollY = 0;
 	let innerHeight = 0;
-	
+
 	onMount(() => {
 		const handleScroll = () => scrollY = window.scrollY;
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
+
+	function handleImageError(event) {
+		const img = event.target;
+		const parent = img.parentElement;
+
+		// 画像を非表示にして、プレースホルダーを表示
+		img.style.display = 'none';
+
+		// プレースホルダーが既に存在する場合は何もしない
+		if (parent.querySelector('.image-placeholder')) return;
+
+		// プレースホルダー要素を作成
+		const placeholder = document.createElement('div');
+		placeholder.className = 'image-placeholder flex flex-col items-center justify-center w-full h-full text-gray-400';
+		placeholder.innerHTML = `
+			<svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+			</svg>
+			<span class="text-xs">画像準備中</span>
+		`;
+		parent.appendChild(placeholder);
+	}
 </script>
 
 <svelte:window bind:scrollY bind:innerHeight />
@@ -28,6 +50,7 @@
 			<div class="hidden md:flex space-x-8 text-white">
 				<a href="#about" class="hover:text-blue-200 transition-colors">概要</a>
 				<a href="#events" class="hover:text-blue-200 transition-colors">イベント</a>
+				<a href="#pavilions" class="hover:text-blue-200 transition-colors">パビリオン</a>
 				<a href="#access" class="hover:text-blue-200 transition-colors">アクセス</a>
 				<a href="#contact" class="hover:text-blue-200 transition-colors">お問い合わせ</a>
 			</div>
@@ -89,7 +112,7 @@
 					</svg>
 				</div>
 				<h3 class="text-2xl font-bold text-gray-900 mb-4">テクノロジー</h3>
-				<p class="text-gray-600">AR スポーツHADO、桃山学院大学テック部など、最新技術の展示・体験</p>
+				<p class="text-gray-600">いずみを中心とした最新技術の展示・体験</p>
 			</div>
 			
 			<div class="text-center p-8 bg-purple-50 rounded-2xl">
@@ -118,8 +141,7 @@
 				<div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600"></div>
 				<div class="p-8">
 					<h3 class="text-2xl font-bold text-gray-900 mb-4">エコールいずみ</h3>
-					<p class="text-gray-600 mb-6">メイン会場として、さまざまな展示や体験ブースを設置</p>
-					<div class="text-sm text-blue-600 font-semibold">詳細を見る →</div>
+					<p class="text-gray-600 mb-6">企業・地域の動画、当日パンフレットの販売</p>
 				</div>
 			</div>
 			
@@ -128,7 +150,6 @@
 				<div class="p-8">
 					<h3 class="text-2xl font-bold text-gray-900 mb-4">桃山学院大学</h3>
 					<p class="text-gray-600 mb-6">エレノア館・ヨハネ館でテクノロジー体験</p>
-					<div class="text-sm text-green-600 font-semibold">詳細を見る →</div>
 				</div>
 			</div>
 			
@@ -137,15 +158,366 @@
 				<div class="p-8">
 					<h3 class="text-2xl font-bold text-gray-900 mb-4">久保惣記念美術館</h3>
 					<p class="text-gray-600 mb-6">伝統文化と芸術の展示・体験</p>
-					<div class="text-sm text-purple-600 font-semibold">詳細を見る →</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
+<!-- パビリオンセクション -->
+<section id="pavilions" class="py-20 bg-white">
+	<div class="max-w-7xl mx-auto px-6">
+		<div class="text-center mb-16">
+			<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">パビリオン</h2>
+			<p class="text-xl text-gray-600">和泉市の伝統文化、テクノロジー、コミュニティを体験できる多彩なパビリオンをご紹介</p>
+		</div>
+
+		<!-- 伝統文化パビリオン -->
+		<div class="mb-16 bg-gradient-to-br from-red-50 via-pink-50 to-purple-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">伝統文化パビリオン</h3>
+			<p class="text-lg text-gray-600 mb-8">伝統工芸体験、浮世絵刷り体験、ガラス玉ブレスレット作り、さをり織り体験など</p>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+				<!-- パビリオンカード1 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-1.png" alt="井阪晴子" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">井阪硝子</h4>
+					<p class="text-sm text-gray-600">伝統工芸の実演と体験</p>
+				</div>
+
+				<!-- パビリオンカード2 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-2.jpg" alt="佐竹ガラス" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">佐竹ガラス</h4>
+					<p class="text-sm text-gray-600">ガラス工芸の体験</p>
+				</div>
+
+				<!-- パビリオンカード3 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-3.jpg" alt="和泉だんじり" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">和泉だんじり</h4>
+					<p class="text-sm text-gray-600">だんじり文化の紹介</p>
+				</div>
+
+				<!-- パビリオンカード4 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-4.jpg" alt="さをり織り" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">さをり織り</h4>
+					<p class="text-sm text-gray-600">織物の体験</p>
+				</div>
+
+				<!-- パビリオンカード5 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-5.jpg" alt="ガラス玉ブレスレット作り" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">ガラス玉ブレスレット</h4>
+					<p class="text-sm text-gray-600">アクセサリー作り体験</p>
+				</div>
+
+				<!-- パビリオンカード6 -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/tradition-6.jpg" alt="久保惣記念美術館" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">久保惣記念美術館</h4>
+					<p class="text-sm text-gray-600">浮世絵刷り体験</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- テクノロジーパビリオン -->
+		<div class="mb-16 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">テクノロジーパビリオン</h3>
+			<p class="text-lg text-gray-600 mb-8">和泉市から世界に羽ばたく企業が一同に集合！大阪・関西万博度出展企業も多数参加</p>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-6">
+				<!-- パビリオンカード -->
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-1.jpg" alt="ATTACCATO合同会社" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">ATTACCATO合同会社</h4>
+					<p class="text-xs text-gray-600">最新技術の展示</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-2.jpg" alt="エースシステム株式会社" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">エースシステム株式会社</h4>
+					<p class="text-xs text-gray-600">システム開発</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-3.jpg" alt="株式会社興徳クリーナー" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">株式会社興徳クリーナー</h4>
+					<p class="text-xs text-gray-600">環境技術</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-4.jpg" alt="メディカルエイド株式会社" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">メディカルエイド株式会社</h4>
+					<p class="text-xs text-gray-600">医療支援技術</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-5.jpg" alt="株式会社USEYA" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">株式会社USEYA</h4>
+					<p class="text-xs text-gray-600">イノベーション</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-6.jpg" alt="大阪トヨペット" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">大阪トヨペット</h4>
+					<p class="text-xs text-gray-600">モビリティ技術</p>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/tech-7.jpg" alt="大栄環境グループ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1 text-sm">大栄環境グループ</h4>
+					<p class="text-xs text-gray-600">環境ソリューション</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- コミュニティパビリオン -->
+		<div class="mb-16 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">コミュニティパビリオン</h3>
+			<p class="text-lg text-gray-600 mb-8">コミュニティは地域支援と食品・物販など</p>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-1.jpg" alt="なんよこPLAY PARK" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">なんよこPLAY PARK</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-2.jpg" alt="地域拠点FLAT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">地域拠点FLAT</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-3.jpg" alt="企業主導型両親教室" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">企業主導型両親教室</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-4.jpg" alt="稲空カフェ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">稲空カフェ</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-5.jpg" alt="自由帳" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">自由帳</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-gray-100 rounded-xl overflow-hidden mb-3 aspect-square">
+						<img src="/images/pavilions/community-6.jpg" alt="有新サービス" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">有新サービス</h4>
+				</div>
+			</div>
+		</div>
+
+		<!-- 食・特産品パビリオン -->
+		<div class="mb-16 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">食・特産品パビリオン</h3>
+			<p class="text-lg text-gray-600 mb-8">和泉市の農業・特産品を知って・食べて・感じる未来</p>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-1.jpg" alt="今井とうふ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">今井とうふ</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-2.jpg" alt="おに工房 花菜" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">おに工房 花菜</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-3.jpg" alt="オヤジのたまごループ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">オヤジのたまごループ</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-4.jpg" alt="Café FLAT" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">Café FLAT</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-5.jpg" alt="キノシタファーム" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">キノシタファーム</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="久保農園" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">久保農園</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="K.farm Musubi" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">K.farm Musubi</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="つじい農園" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">つじい農園</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="TETEONI" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">TETEONI</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="肉のばんば家" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">肉のばんば家</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="hachiiro" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">hachiiro</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="ふじわらのうえん" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">ふじわらのうえん</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="丸和食品株式会社" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">丸和食品株式会社</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="株式会社MealFarm" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">株式会社MealFarm</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="心寿" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">心寿</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-6.jpg" alt="シビスおくむら" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">シビスおくむら</h4>
+				</div>
+			</div>
+		</div>
+
+		<div class="mb-16 bg-gradient-to-br from-rose-50 via-red-50 to-orange-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">キッチンカー</h3>
+			<p class="text-lg text-gray-600 mb-8">ワクワクおいしいキッチンカー</p>
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-1.jpg" alt="今井とうふ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">今井とうふ</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-2.jpg" alt="おに工房 花菜" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">おに工房 花菜</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-3.jpg" alt="オヤジのたまごループ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">オヤジのたまごループ</h4>
+				</div>
+
+				<div class="group">
+					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
+						<img src="/images/pavilions/food-3.jpg" alt="オヤジのたまごループ" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
+					</div>
+					<h4 class="font-bold text-gray-900 mb-1">オヤジのたまごループ</h4>
+				</div>
+			</div>
+		</div>
+
+		<div class="mb-16 bg-gradient-to-br from-indigo-50 via-violet-50 to-purple-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">大人のパビリオン</h3>
+			<p class="text-lg text-gray-600 mb-8">お酒などのコンテンツを用意しています</p>
+		</div>
+
+		<div class="mb-16 bg-gradient-to-br from-pink-50 via-fuchsia-50 to-rose-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">音楽</h3>
+			<p class="text-lg text-gray-600 mb-8">地域の方々の演奏をチャペルで行います</p>
+		</div>
+
+		<div class="bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 rounded-3xl p-8">
+			<h3 class="text-3xl font-bold text-gray-900 mb-8">プロジェクションマッピング</h3>
+			<p class="text-lg text-gray-600 mb-8">桃山学院大学テック部の学生によるプロジェクションマッピング</p>
+		</div>
+	</div>
+</section>
+
 <!-- アクセスセクション -->
-<section id="access" class="py-20 bg-white">
+<section id="access" class="py-20 bg-gray-50">
 	<div class="max-w-7xl mx-auto px-6">
 		<div class="text-center mb-16">
 			<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">アクセス</h2>
@@ -158,13 +530,14 @@
 					<div class="border-l-4 border-blue-500 pl-6">
 						<h4 class="font-semibold text-lg text-gray-900">開催日</h4>
 						<p class="text-gray-600">2025年10月25日（土）</p>
+						<p class="text-gray-600">10時〜19時(展示は17時まで)</p>
 					</div>
 					
 					<div class="border-l-4 border-green-500 pl-6">
 						<h4 class="font-semibold text-lg text-gray-900">会場</h4>
 						<ul class="text-gray-600 space-y-1">
 							<li>• エコールいずみ</li>
-							<li>• 桃山学院大学（エレノア館・ヨハネ館）</li>
+							<li>• 桃山学院大学（エレノア館・ヨハネ館・バルナバ館・チャペル）</li>
 							<li>• 久保惣記念美術館</li>
 						</ul>
 					</div>
