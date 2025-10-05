@@ -33,6 +33,68 @@
 	}
 </script>
 
+<svelte:head>
+	<title>いずみ万博2025 - いのち輝く未来社会のいずみ | 和泉市制施行70周年記念</title>
+	<meta name="description" content="和泉市制施行70周年記念「いずみ万博2025」- 2025年10月25日開催。伝統文化、最新テクノロジー、地域コミュニティが融合する未来社会を体験。エコールいずみ・桃山学院大学・久保惣記念美術館で多彩なパビリオンとイベントを展開。" />
+	<meta property="og:url" content="https://izumi-expo.jp" />
+	<meta name="twitter:url" content="https://izumi-expo.jp" />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Event",
+			"name": "いずみ万博2025 - いのち輝く未来社会のいずみ",
+			"description": "和泉市制施行70周年記念イベント。伝統文化、最新テクノロジー、地域コミュニティが融合する未来社会を体験。",
+			"startDate": "2025-10-25T10:00:00+09:00",
+			"endDate": "2025-10-25T19:00:00+09:00",
+			"eventStatus": "https://schema.org/EventScheduled",
+			"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+			"location": [
+				{
+					"@type": "Place",
+					"name": "エコールいずみ",
+					"address": {
+						"@type": "PostalAddress",
+						"addressLocality": "和泉市",
+						"addressRegion": "大阪府",
+						"addressCountry": "JP"
+					}
+				},
+				{
+					"@type": "Place",
+					"name": "桃山学院大学",
+					"address": {
+						"@type": "PostalAddress",
+						"addressLocality": "和泉市",
+						"addressRegion": "大阪府",
+						"addressCountry": "JP"
+					}
+				},
+				{
+					"@type": "Place",
+					"name": "久保惣記念美術館",
+					"address": {
+						"@type": "PostalAddress",
+						"addressLocality": "和泉市",
+						"addressRegion": "大阪府",
+						"addressCountry": "JP"
+					}
+				}
+			],
+			"organizer": {
+				"@type": "Organization",
+				"name": "いずみ万博実行委員会",
+				"url": "https://izumi-expo.jp"
+			},
+			"image": "https://izumi-expo.jp/og-image.jpg",
+			"url": "https://izumi-expo.jp"
+		}
+		<\/script>
+	`}
+</svelte:head>
+
 <svelte:window bind:scrollY bind:innerHeight />
 
 <!-- ヒーローセクション -->
@@ -68,7 +130,7 @@
 				和泉市制施行70周年記念
 			</p>
 			<div class="text-lg md:text-xl mb-12 space-y-2">
-				<p class="font-semibold">2025年10月25日（土）10:00〜19:00</p>
+				<p class="font-semibold">2025年10月25日（土）10:00〜19:00(展示は17:00まで)</p>
 				<p>エコールいずみ・桃山学院大学・久保惣記念美術館</p>
 			</div>
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -530,7 +592,7 @@
 					<div class="border-l-4 border-blue-500 pl-6">
 						<h4 class="font-semibold text-lg text-gray-900">開催日</h4>
 						<p class="text-gray-600">2025年10月25日（土）</p>
-						<p class="text-gray-600">10時〜19時(展示は17時まで)</p>
+						<p class="text-gray-600">10:00〜19:00(展示は17:00まで)</p>
 					</div>
 					
 					<div class="border-l-4 border-green-500 pl-6">
