@@ -485,13 +485,6 @@
 
 				<div class="group">
 					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
-						<img src="/images/pavilions/food-6.jpg" alt="hachiiro" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
-					</div>
-					<h4 class="font-bold text-gray-900 mb-1">hachiiro</h4>
-				</div>
-
-				<div class="group">
-					<div class="bg-amber-50 rounded-xl overflow-hidden mb-3 aspect-square flex items-center justify-center p-4">
 						<img src="/images/pavilions/food-6.jpg" alt="ふじわらのうえん" class="max-w-full max-h-full object-contain" on:error={handleImageError} />
 					</div>
 					<h4 class="font-bold text-gray-900 mb-1">ふじわらのうえん</h4>
